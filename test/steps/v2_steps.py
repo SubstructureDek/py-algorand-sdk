@@ -1877,7 +1877,7 @@ def algod_v2_client_at_host_port_and_token(context, host, port, token):
 
 @given("an algod v2 client")
 def algod_v2_client(context):
-    algod_address = "http://localhost" + ":" + str(algod_port)
+    algod_address = "http://algod" + ":" + str(algod_port)
     context.app_acl = algod.AlgodClient(daemon_token, algod_address)
 
 

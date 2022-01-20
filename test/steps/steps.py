@@ -311,13 +311,13 @@ def sk_eq_export(context):
 
 @given("a kmd client")
 def kmd_client(context):
-    kmd_address = "http://localhost:" + str(kmd_port)
+    kmd_address = "http://algod:" + str(kmd_port)
     context.kcl = kmd.KMDClient(token, kmd_address)
 
 
 @given("an algod client")
 def algod_client(context):
-    algod_address = "http://localhost:" + str(algod_port)
+    algod_address = "http://algod:" + str(algod_port)
     context.acl = algod.AlgodClient(token, algod_address)
     if context.acl.status()["lastRound"] < 2:
         context.acl.status_after_block(2)
