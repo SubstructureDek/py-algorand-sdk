@@ -18,10 +18,8 @@ docker build -t py-sdk-testing -f Dockerfile "$(pwd)"
 
 # Start test harness environment
 ./test-harness/scripts/up.sh
-docker network list
-docker run --network test-harness_sdk-harness --rm curlimages/curl:7.81.0 "http://indexer-221-1:8980/v2/accounts"
-docker run --network test-harness_sdk-harness --rm curlimages/curl:7.81.0 -sL -w "%{http_code}\\n" "http://indexer-221-1:8980/v2/accounts" -o /dev/null --connect-timeout 3 --max-time 5
-while [ $(docker run --network test-harness_sdk-harness --rm curlimages/curl:7.81.0 -sL -w "%{http_code}\\n" "http://indexer-221-1:8980/v2/accounts" -o /dev/null --connect-timeout 3 --max-time 5) -ne "200" ]
+
+while [ $(docker run --network test-harness_sdk-harness --rm curlimages/curl:7.81.0 -sL -w "%{http_code}\\n" "http://indexer-221-1:8980/v2/accounts" --connect-timeout 3 --max-time 5) -ne "200" ]
 do
   sleep 1
 done
